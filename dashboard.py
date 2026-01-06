@@ -51,7 +51,7 @@ st.markdown("<h1 class='main-header'>💊 Demo Dashboard</h1>", unsafe_allow_htm
 
 # Sidebar for filters
 with st.sidebar:
-    st.image("https://cdn-icons-png.flaticon.com/512/206/206853.png", width=100)
+    st.image("https://i.pinimg.com/280x280_RS/e8/c9/ed/e8c9eda12fae13b865821fec7b8501a8.jpg", width=100)
     st.title("Filters & Controls")
     
     # Date range filter
@@ -464,6 +464,7 @@ st.markdown("""
     <p style='font-size: 0.8em;'>For internal use only. All drug names are fictional.</p>
 </div>
 """.format(datetime.now().strftime("%Y-%m-%d %H:%M")), unsafe_allow_html=True)
+
 
 
 
