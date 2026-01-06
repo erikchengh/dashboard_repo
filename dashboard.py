@@ -47,7 +47,7 @@ if 'selected_region' not in st.session_state:
     st.session_state.selected_region = 'All Regions'
 
 # Title and Header
-st.markdown("<h1 class='main-header'>💊 Pharma Analytics Dashboard</h1>", unsafe_allow_html=True)
+st.markdown("<h1 class='main-header'>💊 Demo Dashboard</h1>", unsafe_allow_html=True)
 
 # Sidebar for filters
 with st.sidebar:
@@ -607,3 +607,4 @@ st.markdown("""
 
 
 # streamlit run dashboard.py
+
