@@ -55,23 +55,16 @@ st.markdown("<h1 class='main-header'>💊 Demo Dashboard</h1>", unsafe_allow_htm
 #     st.title("Filters & Controls")
 
 with st.sidebar:
-    # CSS to center the image
-    st.markdown("""
-    <style>
-    .center-image {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 20px;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-    
-    # Apply the CSS class to the image container
-    st.markdown('<div class="center-image">', unsafe_allow_html=True)
-    st.image("https://i.pinimg.com/280x280_RS/e8/c9/ed/e8c9eda12fae13b865821fec7b8501a8.jpg", width=100)
-    st.markdown('</div>', unsafe_allow_html=True)
+    # PROVEN WORKING SOLUTION
+    _, center, _ = st.columns([0.2, 1, 0.2])
+    with center:
+        st.image("https://i.pinimg.com/280x280_RS/e8/c9/ed/e8c9eda12fae13b865821fec7b8501a8.jpg", 
+                width=100,
+                use_container_width=False)  # Important: set to False
     
     st.title("Filters & Controls")
+    
+    # Rest of your sidebar code...
     
     # Date range filter
     st.subheader("📅 Date Range")
@@ -483,6 +476,7 @@ st.markdown("""
     <p style='font-size: 0.8em;'>For internal use only. All drug names are fictional.</p>
 </div>
 """.format(datetime.now().strftime("%Y-%m-%d %H:%M")), unsafe_allow_html=True)
+
 
 
 
