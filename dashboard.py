@@ -8,7 +8,7 @@ import random
 
 # Page configuration
 st.set_page_config(
-    page_title="Demo Dashboard",
+    page_title="My Dashboard",
     page_icon="💊",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -346,112 +346,6 @@ with col_right:
 st.divider()
 tab1, tab2, tab3 = st.tabs(["📋 Drug Portfolio", "📈 Sales Details", "📊 Clinical Trials"])
 
-# with tab1:
-#     col1, col2 = st.columns(2)
-    
-#     with col1:
-#         st.dataframe(
-#             drugs_df[['Name', 'Category', 'Launch_Date', 'Patent_Expiry', 'Status']]
-#             .sort_values('Launch_Date', ascending=False)
-#             .style.background_gradient(subset=['Category'], cmap='Pastel1')
-#             .format({'Launch_Date': lambda x: x.strftime('%Y-%m-%d') 
-#                     if pd.notnull(x) else ''}),
-#             height=300
-#         )
-
-# with tab1:
-#     col1, col2 = st.columns(2)
-    
-#     with col1:
-#         # 1. Define a function to map categories to colors
-#         def color_category(val):
-#             color_map = {
-#                 'Oncology': 'background-color: #FFD1DC',   # Light Pink
-#                 'Cardiology': 'background-color: #B3E5FC', # Light Blue
-#                 'Neurology': 'background-color: #C8E6C9',  # Light Green
-#                 'Diabetes': 'background-color: #FFF9C4',   # Light Yellow
-#                 'Immunology': 'background-color: #E1BEE7'  # Light Purple
-#             }
-#             return color_map.get(val, '')
-
-#         # 2. Apply the styling using .map() instead of background_gradient
-#         st.dataframe(
-#             drugs_df[['Name', 'Category', 'Launch_Date', 'Patent_Expiry', 'Status']]
-#             .sort_values('Launch_Date', ascending=False)
-#             .style.map(color_category, subset=['Category']) # Use .map for text columns
-#             .format({
-#                 'Launch_Date': lambda x: x.strftime('%Y-%m-%d') if pd.notnull(x) else '',
-#                 'Patent_Expiry': lambda x: x.strftime('%Y-%m-%d') if pd.notnull(x) else ''
-#             }),
-#             height=300,
-#             use_container_width=True
-#         )
-    
-#     with col2:
-#         # Patent Expiry Timeline
-#         st.subheader("📅 Patent Expiry Timeline")
-#         drugs_df['Years_to_Expiry'] = (
-#             pd.to_datetime(drugs_df['Patent_Expiry']) - pd.Timestamp.now()
-#         ).dt.days / 365.25
-        
-#         fig_patent = px.timeline(
-#             drugs_df,
-#             x_start="Launch_Date",
-#             x_end="Patent_Expiry",
-#             y="Name",
-#             color="Years_to_Expiry",
-#             color_continuous_scale="RdYlGn_r",
-#             title="Drug Patent Timeline"
-#         )
-#         fig_patent.update_layout(height=350)
-#         st.plotly_chart(fig_patent, use_container_width=True)
-
-# with tab1:
-#     col1, col2 = st.columns(2)
-    
-#     with col1:
-#         # Define custom color logic
-#         def color_category(val):
-#             color_map = {
-#                 'Oncology': 'background-color: #FFD1DC',
-#                 'Cardiology': 'background-color: #B3E5FC',
-#                 'Neurology': 'background-color: #C8E6C9',
-#                 'Diabetes': 'background-color: #FFF9C4',
-#                 'Immunology': 'background-color: #E1BEE7'
-#             }
-#             return color_map.get(val, '')
-
-#         st.dataframe(
-#             drugs_df[['Name', 'Category', 'Launch_Date', 'Patent_Expiry', 'Status']]
-#             .sort_values('Launch_Date', ascending=False)
-#             .style.map(color_category, subset=['Category'])  # Fixed: uses .map instead of gradient
-#             .format({
-#                 'Launch_Date': lambda x: x.strftime('%Y-%m-%d') if pd.notnull(x) else '',
-#                 'Patent_Expiry': lambda x: x.strftime('%Y-%m-%d') if pd.notnull(x) else ''
-#             }),
-#             height=300,
-#             use_container_width=True
-#         )
-
-#     with col2:
-#         st.subheader("📅 Patent Expiry Timeline")
-#         # Recalculate expiry using the converted dates
-#         drugs_df['Years_to_Expiry'] = (
-#             drugs_df['Patent_Expiry'] - pd.Timestamp.now()
-#         ).dt.days / 365.25
-        
-#         fig_patent = px.timeline(
-#             drugs_df,
-#             x_start="Launch_Date",
-#             x_end="Patent_Expiry",
-#             y="Name",
-#             color="Years_to_Expiry",
-#             color_continuous_scale="RdYlGn_r",
-#             title="Drug Patent Timeline"
-#         )
-#         fig_patent.update_layout(height=350)
-#         st.plotly_chart(fig_patent, use_container_width=True)
-
 with tab1:
     col1, col2 = st.columns(2)
     
@@ -497,40 +391,6 @@ with tab1:
         )
         fig_patent.update_layout(height=350)
         st.plotly_chart(fig_patent, use_container_width=True)
-
-# with tab2:
-#     # Interactive sales table with filtering
-#     st.subheader("Detailed Sales Data")
-    
-#     # Add quarter calculation
-#     filtered_sales['Quarter'] = filtered_sales['Date'].dt.to_period('Q').astype(str)
-    
-#     # Group by multiple dimensions
-#     pivot_sales = pd.pivot_table(
-#         filtered_sales,
-#         values='Sales_USD_M',
-#         index=['Drug_Name', 'Category'],
-#         columns='Quarter',
-#         aggfunc='sum',
-#         fill_value=0
-#     ).reset_index()
-    
-#     st.dataframe(
-#         pivot_sales.style
-#         .background_gradient(subset=pivot_sales.columns[2:], cmap='YlOrRd')
-#         .format('${:,.0f}'),
-#         height=400,
-#         use_container_width=True
-#     )
-    
-#     # Download button
-#     csv = pivot_sales.to_csv(index=False).encode('utf-8')
-#     st.download_button(
-#         label="📥 Download Sales Data",
-#         data=csv,
-#         file_name="pharma_sales_data.csv",
-#         mime="text/csv",
-#     )
 
 with tab2:
     # Interactive sales table with filtering
@@ -606,5 +466,4 @@ st.markdown("""
 """.format(datetime.now().strftime("%Y-%m-%d %H:%M")), unsafe_allow_html=True)
 
 
-# streamlit run dashboard.py
 
