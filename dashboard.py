@@ -8,7 +8,7 @@ import random
 
 # Page configuration
 st.set_page_config(
-    page_title="Pharma Analytics Dashboard",
+    page_title="Demo Dashboard",
     page_icon="💊",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -604,5 +604,6 @@ st.markdown("""
     <p style='font-size: 0.8em;'>For internal use only. All drug names are fictional.</p>
 </div>
 """.format(datetime.now().strftime("%Y-%m-%d %H:%M")), unsafe_allow_html=True)
+
 
 # streamlit run dashboard.py
